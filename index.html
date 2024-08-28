@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+  </head>
+  <body>
+    <div id="root">
+      <h3>Peliculas</h3>
+      <form v-for="movie in movies">
+        <h2>{{movie.name}}</h2>
+        <button
+          type="button"
+          @click="movie.quantity -=1"
+          :disabled="movie.quantity<=0"
+        >
+          -
+        </button>
+        {{movie.quantity}}
+        <button
+          type="button"
+          @click="movie.quantity +=1"
+          :disabled="movie.quantity>=movie.available"
+        >
+          +
+        </button>
+      </form>
+    </div>
+    <script src="https://unpkg.com/vue@3.0.5/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue;
+      const app = createApp({
+        data() {
+          return {
+            movies: [
+              {
+                name: "Avenguers",
+                available: 5,
+                quantity: 0,
+              },
+              {
+                name: "Iron Man",
+                available: 12,
+                quantity: 0,
+              },
+              {
+                name: "Capitan America",
+                available: 4,
+                quantity: 0,
+              },
+            ],
+          };
+        },
+      });
+      app.mount("#root");
+    </script>
+  </body>
+</html>
